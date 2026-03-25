@@ -1,15 +1,28 @@
 <?php
 
-    require(__DIR__."/Model/pdo.php");
+require(__DIR__."/Model/pdo.php");
 
-    $res = $dbPDO->prepare("SELECT * FROM eleves");
+$res = $dbPDO->prepare("SELECT * FROM eleves");
+$res->execute();
 
-    $res ->execute();
+//echo "<br><br>";
 
-    $eleves = $resultat->fetchAll(PDO::FETCH_CLASS);
+$clients = $res->fetchAll();
 
-    foreach($eleves as $e) {
-        echo $e->nom."aazeae";
-    }
+echo "<pre>";
+
+//var_dump($clients);
+
+foreach($clients as $client) {
+    echo "<li>".$client['nom'];
+}
+/*
+$rows = count($clients);
+
+if ($rows > 0){
+    echo "Il y a $rows client(s)";
+} else {
+    echo "Aucun client";
+}*/
 
 ?>
