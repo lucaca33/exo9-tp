@@ -46,4 +46,10 @@
         echo "<li>".$e['nomProf']." ".$e['prenomProf']." prof de ".$e['nomMatiere']." pour la classe de ".$e['nomClasse'];
     }
 
+    // partie 3 : ajouter des données
+
+    $res = $dbPDO->prepare("INSERT INTO matières (Id_Prof, nom) VALUES (1, math);");
+    $res->execute();
+    $clients = $res->fetchAll();
+    
 ?>
