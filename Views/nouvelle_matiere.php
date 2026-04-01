@@ -1,7 +1,7 @@
 <?php
 require(__DIR__."/../Model/pdo.php");
 
-// Vérifier que le formulaire a été soumis et les champs remplis
+// vérifier que le formulaire a été soumis et les champs remplis
 if (
     isset($_POST['nom_matiere']) && !empty($_POST['nom_matiere']) &&
     isset($_POST['id_prof']) && !empty($_POST['id_prof'])

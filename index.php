@@ -56,3 +56,13 @@
     <input type="number" name="id_prof" placeholder="ID du prof" required>
     <button type="submit">Valider</button>
 </form>
+
+
+<h2>Ajouter un étudiant</h2>
+
+<form action="Views/nouvel_eudiant.php" method="POST">
+    <input type="text" name="nom" placeholder="Nom" required>
+    <input type="text" name="prenom" placeholder="Prenom" required>
+    <input type="text" name="Id_Classes" placeholder="ID de la classe" required>
+    <button type="submit">Valider</button>
+</form>
