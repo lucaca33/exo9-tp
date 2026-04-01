@@ -11,8 +11,10 @@
 
     echo "Voici les noms qui sont présents dans la classe :<br><br>";
     foreach($clients as $e) {
-        echo "<li>".$e['nom']." ".$e['prenom'];
+        echo "<li>".$e['nom']." ".$e['prenom']." ";
+        echo' <a href="./Views/modif_etudiant.php?id='.$e['Id_eleve'].'">Modifier</a>';
     }
+    
 
     echo "<br>";
 
@@ -22,7 +24,7 @@
 
     echo "<br>Voici la liste de toute les classes :<br><br>";
 
-    // pour ajout étudiant on met certains changements
+    // pour ajout étudiant
     $classes = [];
 
     foreach($clients as $e) {
