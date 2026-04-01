@@ -47,9 +47,30 @@
     }
 
     // partie 3 : ajouter des données
+?>
 
-    $res = $dbPDO->prepare("INSERT INTO matières (Id_Prof, nom) VALUES (1, math);");
-    $res->execute();
-    $clients = $res->fetchAll();
-    
+<h2>Ajouter une matière</h2>
+
+<form method="POST">
+    <input type="text" name="nom_matiere" placeholder="Nom de la matière" required>
+    <input type="number" name="id_prof" placeholder="ID du prof" required>
+    <button type="submit">Valider</button>
+</form>
+
+<?php
+
+if (isset($_POST['nom_matiere']) && !empty($_POST['nom_matiere']) && isset($_POST['id_prof']) && !empty($_POST['id_prof'])) { // faire les checks
+
+    $nom = htmlspecialchars($_POST['nom_matiere']);
+    $id_prof = (int) $_POST['id_prof'];
+
+    $res = $dbPDO->prepare("INSERT INTO matières (Id_Prof, nom) VALUES (:id_prof, :nom)");
+
+    $res->execute([
+        'id_prof' => $id_prof,
+        'nom' => $nom
+    ]);
+
+    echo "<br>Matière ajoutée !";
+}
 ?>
