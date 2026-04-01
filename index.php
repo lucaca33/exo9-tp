@@ -22,8 +22,12 @@
 
     echo "<br>Voici la liste de toute les classes :<br><br>";
 
+    // pour ajout étudiant on met certains changements
+    $classes = [];
+
     foreach($clients as $e) {
         echo "<li>".$e['nom'];
+        $classes[$e['Id_Classes']] = $e['nom'];
     }
 
     $res = $dbPDO->prepare("SELECT * FROM prof");
@@ -63,6 +67,13 @@
 <form action="Views/nouvel_eudiant.php" method="POST">
     <input type="text" name="nom" placeholder="Nom" required>
     <input type="text" name="prenom" placeholder="Prenom" required>
-    <input type="text" name="Id_Classes" placeholder="ID de la classe" required>
+    <?php
+    echo'<select name="Id_Classes">';
+    echo'<option value="">--Veuillez choisir une classe--</option>';
+    foreach ($classes as $id => $nom) {
+        echo'<option value="'.$id.'">'.$nom.'</option>';
+    }
+    echo'</select>';
+    ?>
     <button type="submit">Valider</button>
 </form>
