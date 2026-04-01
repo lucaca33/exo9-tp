@@ -6,8 +6,8 @@ if (
     isset($_POST['nom_matiere']) && !empty($_POST['nom_matiere']) &&
     isset($_POST['id_prof']) && !empty($_POST['id_prof'])
 ) {
-    $nom = htmlspecialchars($_POST['nom_matiere']);
-    $id_prof = (int) $_POST['id_prof'];
+    $nom = htmlspecialchars($_POST['nom_matiere']); // éviter injections sql
+    $id_prof = (int) $_POST['id_prof']; // la même
 
     $res = $dbPDO->prepare("INSERT INTO matières (Id_Prof, nom) VALUES (:id_prof, :nom)");
     $res->execute([
@@ -15,7 +15,7 @@ if (
         'nom' => $nom
     ]);
 
-    echo "<br>✅ Matière ajoutée !";
+    echo "<br>Matière ajoutée !";
 }
 ?>
 
