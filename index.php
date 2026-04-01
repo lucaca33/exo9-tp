@@ -12,9 +12,10 @@
     echo "Voici les noms qui sont présents dans la classe :<br><br>";
     foreach($clients as $e) {
         echo "<li>".$e['nom']." ".$e['prenom']." ";
-        echo' <a href="./Views/modif_etudiant.php?id='.$e['Id_eleve'].'">Modifier</a>';
+        echo' <a href="./Views/modif_etudiant.php?id='.$e['Id_eleve'].'">Modifier </a>';
+        echo' <a href="./Views/suppression_etudiant.php?id='.$e['Id_eleve'].'"> SUPPRIMER</a>';
     }
-    
+
 
     echo "<br>";
 
