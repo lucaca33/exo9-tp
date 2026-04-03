@@ -1,10 +1,25 @@
-
-
 <?php
 
-    require(__DIR__."/Model/pdo.php");
+require(__DIR__."/../Model/pdo.php");
 
-    echo' <a href="./admin.php">Se connecter / Vue admin </a> <br><br>';
+echo' <a href="./../index.php">Retour </a> <br><br>';
+
+$user = htmlspecialchars($_POST['user']);
+$pass = sha1(htmlspecialchars($_POST['password']));
+$res = $dbPDO->prepare("SELECT * FROM user");
+$res->execute();
+$users = $res->fetchAll();
+
+$trouv = 0;
+foreach ($users as $e) {
+    if ($user == $e['nom']) {
+        if ($pass == sha1($e['mdp']) ){
+            $trouv = 1;
+        }
+    }
+}
+
+if ($trouv) {
 
     $res = $dbPDO->prepare("SELECT * FROM eleves");
     $res->execute();
@@ -16,6 +31,8 @@
     echo "Voici les noms qui sont présents dans la classe :<br><br>";
     foreach($clients as $e) {
         echo "<li>".$e['nom']." ".$e['prenom']." ";
+        echo' <a href="./../Views/modif_etudiant.php?id='.$e['Id_eleve'].'">Modifier </a>';
+        echo' <a href="./../Views/suppression_etudiant.php?id='.$e['Id_eleve'].'"> SUPPRIMER</a>';
     }
 
 
@@ -60,7 +77,7 @@
 ?>
 <h2>Ajouter une matière</h2>
 
-<form action="Views/nouvelle_matiere.php" method="POST">
+<form action="../Views/nouvelle_matiere.php" method="POST">
     <input type="text" name="nom_matiere" placeholder="Nom de la matière" required>
     <input type="number" name="id_prof" placeholder="ID du prof" required>
     <button type="submit">Valider</button>
@@ -69,7 +86,7 @@
 
 <h2>Ajouter un étudiant</h2>
 
-<form action="Views/nouvel_eudiant.php" method="POST">
+<form action="../Views/nouvel_eudiant.php" method="POST">
     <input type="text" name="nom" placeholder="Nom" required>
     <input type="text" name="prenom" placeholder="Prenom" required>
     <?php
@@ -81,4 +98,10 @@
     echo'</select>';
     ?>
     <button type="submit">Valider</button>
-</form>
+</form><?php
+}
+else {
+    echo'<h1>Mot de passe ou utilisateur incorrect</h1>';
+}
+
+?>

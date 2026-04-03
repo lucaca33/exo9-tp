@@ -1,14 +1,7 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
 require(__DIR__."/../Model/pdo.php");
 
-if (isset($_GET['id'])) {
-    $id = $_GET['id'];
-} else {
-    echo "Aucun ID reçu";
-    exit; // quitter
-}
+$id = $_GET['id'];
 
 $res = $dbPDO->prepare("SELECT * FROM eleves WHERE Id_eleve = :id");
 $res->execute(['id' => $id]);
